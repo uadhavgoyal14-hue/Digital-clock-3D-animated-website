@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>CHRONOS // 3D Twin-Bell Alarm Clock & Precision Chronometer</title>
+    <meta name="description" content="A cinematic 3D scroll-driven journey through iconic twin-bell alarm clock architecture, real-time horology, and milliseconds stopwatch.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 3D WebGL Background Canvas -->
+    <div id="canvas-container">
+        <canvas id="webgl-canvas"></canvas>
+    </div>
+
+    <!-- Luxury Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-emblem">⏰</span>
+            <span class="brand-text">CHRONOS <span class="brand-model">ALARM 01</span></span>
+        </div>
+        <div class="nav-center-time">
+            <span class="live-dot"></span>
+            <span id="nav-live-clock">00:00:00</span>
+        </div>
+        <div class="nav-actions">
+            <button class="nav-btn" id="btnAudio" title="Toggle Mechanical Audio Feedback" onclick="toggleAudio()">
+                <span class="btn-icon">🔊</span> <span class="btn-label">AUDIO</span>
+            </button>
+            <button class="nav-btn" id="btnFormat" title="Toggle 12H / 24H Mode" onclick="toggleFormat()">
+                <span id="formatText">24H</span>
+            </button>
+            <button class="nav-btn nav-btn--accent" onclick="scrollToSection(2)">
+                <span>LAUNCH CHRONO</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Scroll Track & Cinematic Story Sections -->
+    <main class="scroll-container">
+        
+        <!-- SECTION 1: The Masterpiece (Hero) -->
+        <section class="story-section" id="sec-1">
+            <div class="story-card">
+                <div class="card-tag">01 // THE ALARM CLOCK MASTERPIECE</div>
+                <h1 class="card-title">Iconic Twin-Bell Architecture. Real-Time Horology.</h1>
+                <p class="card-desc">
+                    Behold the timeless twin-bell alarm clock sculpted in pure white enamel and champagne gold. 
+                    Rendered with sharp high-contrast contours, dual support peg legs, and a physical ringing striker hammer.
+                </p>
+
+                <!-- Live Digital Time Hero Panel -->
+                <div class="hero-time-box">
+                    <div class="time-readout-group">
+                        <span class="time-label">SYNCHRONIZED LOCAL TIME</span>
+                        <div class="main-clock" id="clock">00:00:00</div>
+                        <div class="main-date" id="date">Loading calendar date...</div>
+                    </div>
+                </div>
+
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <span class="stat-val">32,768 Hz</span>
+                        <span class="stat-lbl">QUARTZ PULSE</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-val">1/1000s</span>
+                        <span class="stat-lbl">SPLIT CHRONO</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-val">Twin-Bell</span>
+                        <span class="stat-lbl">STRIKE MECHANISM</span>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button class="action-btn action-btn--primary" onclick="scrollToSection(1)">
+                        <span>EXPLORE EXPLODED 3D VIEW ↓</span>
+                    </button>
+                    <button class="action-btn action-btn--secondary" onclick="scrollToSection(2)">
+                        <span>START STOPWATCH ⏱</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Exploded Architecture (Deconstruction) -->
+        <section class="story-section" id="sec-2">
+            <div class="story-card">
+                <div class="card-tag">02 // EXPLODED ALARM CLOCK ANATOMY</div>
+                <h2 class="card-title">Deconstructed in Full Dimension.</h2>
+                <p class="card-desc">
+                    As you scroll, the alarm clock disassembles in 3D space. 
+                    Inspect the glass dome, high-contrast dark bezel rim, porcelain dial face with spade hands, and the dual gold bell domes.
+                </p>
+
+                <div class="layer-legend">
+                    <div class="legend-item"><span class="legend-dot dot-1"></span> Sapphire Glass Front (+65mm)</div>
+                    <div class="legend-item"><span class="legend-dot dot-2"></span> High-Contrast Bezel & Gold Ring (+38mm)</div>
+                    <div class="legend-item"><span class="legend-dot dot-3"></span> Porcelain Dial & Spade Hands (+15mm)</div>
+                    <div class="legend-item"><span class="legend-dot dot-4"></span> Mechanical Bell Gearset (0mm)</div>
+                    <div class="legend-item"><span class="legend-dot dot-5"></span> Twin Bells, Body, Legs & Handle (-45mm)</div>
+                </div>
+
+                <div class="card-actions">
+                    <button class="action-btn action-btn--primary" onclick="scrollToSection(2)">
+                        <span>ENTER CHRONOGRAPH & ALARM LAB ↓</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Precision Chronometer Lab (Stopwatch & Alarm) -->
+        <section class="story-section" id="sec-3">
+            <div class="story-card story-card--large">
+                <div class="card-tag">03 // ACTIVE CHRONOMETER & ALARM LAB</div>
+                <h2 class="card-title">Milliseconds Telemetry & Bell Chime.</h2>
+                <p class="card-desc">
+                    High-frequency millisecond timing with acoustic mechanical feedback and real alarm triggering. 
+                    Use the pushers below or keyboard shortcuts (Space = Start/Stop, L = Lap, R = Reset).
+                </p>
+
+                <!-- Interactive Alarm Setting Feature -->
+                <div class="alarm-feature-panel">
+                    <div>
+                        <span class="time-label">ALARM CHIME SIMULATOR</span>
+                        <span style="font-size: 13px; font-weight: 600; color: var(--text-secondary);">Test the 3D Twin-Bell Physical Striker</span>
+                    </div>
+                    <button class="push-btn push-btn--start" id="btnTestAlarm" onclick="toggleTestAlarm()">
+                        <span>🔔 RING BELLS</span>
+                    </button>
+                </div>
+
+                <!-- Interactive Stopwatch Main Readout -->
+                <div class="stopwatch-display-card">
+                    <div class="chrono-status-badge">
+                        <span class="chrono-status-dot" id="chronoStatusDot"></span>
+                        <span id="chronoStatusText">READY TO RECORD</span>
+                    </div>
+
+                    <div class="stopwatch-digits" id="stopwatch">
+                        <span class="sw-time-unit" id="swHours">00</span>:<span class="sw-time-unit" id="swMins">00</span>:<span class="sw-time-unit" id="swSecs">00</span>.<span class="sw-millis" id="swMillis">000</span>
+                    </div>
+
+                    <!-- Pushers & Buttons Bar -->
+                    <div class="buttons chrono-buttons">
+                        <button class="push-btn push-btn--start" id="btnStart" onclick="start()">
+                            <span class="btn-glyph">▶</span> <span class="btn-text">START</span>
+                        </button>
+                        <button class="push-btn push-btn--stop" id="btnStop" onclick="stop()">
+                            <span class="btn-glyph">⏸</span> <span class="btn-text">STOP</span>
+                        </button>
+                        <button class="push-btn push-btn--lap" id="btnLap" onclick="recordLap()">
+                            <span class="btn-glyph">⏱</span> <span class="btn-text">LAP / SPLIT</span>
+                        </button>
+                        <button class="push-btn push-btn--reset" id="btnReset" onclick="reset()">
+                            <span class="btn-glyph">↺</span> <span class="btn-text">RESET</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Lap Split Records View -->
+                <div class="lap-board" id="lapContainer" style="display: none;">
+                    <div class="lap-board-header">
+                        <span>LAP #</span>
+                        <span>SPLIT INTERVAL</span>
+                        <span>TOTAL ELAPSED</span>
+                    </div>
+                    <div class="lap-board-list" id="lapList"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Performance Analytics & Telemetry -->
+        <section class="story-section" id="sec-4">
+            <div class="story-card">
+                <div class="card-tag">04 // TELEMETRY & RECORDS</div>
+                <h2 class="card-title">Precision Data. Zero Latency Execution.</h2>
+                <p class="card-desc">
+                    All interval splits are benchmarked using high-resolution performance timers. 
+                    Export your split times or reset the chronometer for your next interval session.
+                </p>
+
+                <div class="analytics-metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-val" id="metricLapsCount">0</span>
+                        <span class="metric-label">RECORDED LAPS</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-val" id="metricBestLap">--:--.---</span>
+                        <span class="metric-label">FASTEST SPLIT</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-val" id="metricAvgLap">--:--.---</span>
+                        <span class="metric-label">AVERAGE SPLIT</span>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button class="action-btn action-btn--primary" onclick="copyLapRecords()">
+                        <span>COPY LAP DATA 📋</span>
+                    </button>
+                    <button class="action-btn action-btn--secondary" onclick="scrollToSection(0)">
+                        <span>BACK TO TOP ↑</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Side 3D Navigation Dots Rail -->
+    <nav class="side-nav-rail">
+        <button class="rail-dot is-active" onclick="scrollToSection(0)" data-label="01 Overview"></button>
+        <button class="rail-dot" onclick="scrollToSection(1)" data-label="02 Exploded View"></button>
+        <button class="rail-dot" onclick="scrollToSection(2)" data-label="03 Stopwatch Lab"></button>
+        <button class="rail-dot" onclick="scrollToSection(3)" data-label="04 Telemetry"></button>
+    </nav>
+
+    <!-- Bottom Scroll Indicator Pill -->
+    <div class="bottom-scroll-hint" id="scrollHint">
+        <span>SCROLL TO EXPLODE 3D ALARM CLOCK</span>
+        <div class="mouse-icon"><div class="wheel"></div></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="world3d.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
